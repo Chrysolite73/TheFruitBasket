@@ -1,0 +1,263 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+/*font-family: 'Balsamiq Sans', cursive;
+font-family: 'Caveat', cursive;
+font-family: 'Pacifico', cursive;*/
+html,
+body {
+  height: 100%;
+} 
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-image: linear-gradient(140deg, #c0dd4a 0%, #006400 100%);
+  /* background-image: linear-gradient(140deg, rgb(192, 221, 94) 0%, rgb(0, 100, 0) 100%);*/
+}
+/*header*/
+header {
+  height: 215px;
+  box-shadow: 0 10px 100px rgba(173, 255, 47, .9);
+}
+.logoheader {
+  text-align: center;
+  box-sizing: border-box;
+  padding-top: 20px;
+ /* display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content:flex-end;*/
+}
+.logo img {
+  height: 110px;
+  width: 110px;
+  padding-bottom: 20px;
+}
+h1 {
+  color: rgb(250, 250, 70)	;
+  letter-spacing: 3px;
+  font-family: 'Underdog', cursive;
+  font-size: 35px;
+}
+/*content*/
+.content {
+  display: flex;
+  justify-content: center;
+  flex: 1 0 auto;
+  box-shadow: 0 5px 50px rgba(173, 255, 47, .9);
+}
+.mainBox, .rigthBox, .leftBox {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.rigthBox, .leftBox {
+  width: 350px;
+}
+.mainBox {
+  align-items: center;
+}
+.buttonBox {
+  box-sizing: border-box;
+  padding: 30px 10px 20px;
+  width: 470px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.button {
+  opacity: .9;
+  box-sizing: border-box;
+  height: 60px;
+  width: 220px;
+  text-align: center;
+  color: DarkGreen;
+  font-size: 33px;
+  font-family: 'Marck Script', cursive;
+  background-color: rgb(255, 255, 0);
+  border-radius: 10px;
+  border: 2px solid rgb(249, 212, 35); /*173, 255, 47*/
+  box-shadow: 3px 3px 10px rgba(0, 100, 0, .7);
+  cursor: pointer;
+  z-index: 1;
+}
+.button:hover {
+  box-shadow: 0 0 5px rgba(255, 255, 0, .7);
+  /*transform: scale(1.005);
+	transition: 0.3s;*/
+}
+button {
+  margin: 3px;
+  height: 50px;
+  width: 210px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 0, .7);
+  background-color: rgba(255, 255, 0, .7);
+  color : DarkGreen;
+  font-size: 33px;
+  font-family: 'Marck Script', cursive;
+  cursor: pointer;
+}
+.dropdown-menu {
+  display: none;
+  box-sizing: border-box;
+  padding: 5px;
+  margin-top: 7px;
+  gap: 5px;
+  justify-content: center;
+  width: 217px;
+  background-color: yellow;
+  border-radius: 10px;
+  border: 2px solid rgb(249, 212, 35);
+  box-shadow: 0 0 5px rgba(255, 255, 0, .7);
+}
+.button:hover > .dropdown-menu,
+.button > .dropdown-menu:hover {
+display: flex;
+flex-direction: row;
+align-items: start;
+}
+.menuButton {
+  display: block;
+  position: relative;
+  box-sizing: border-box;
+  padding-top: 6px;
+  height: 50px;
+  width: 215px;
+}
+.menu-timer {
+  font-size: 27px;
+  align-self: center;
+}
+.checkbox {
+  box-sizing: border-box;
+  display:flex;
+  height: 31px;
+  width: 31px;
+  align-self: center;
+  justify-content: center;
+  align-items: center;
+  font-size: 28px;
+  border: 1px solid gold;
+  border-radius: 5px;
+  background-image: linear-gradient(to top, lightgrey 0%, lightgrey 1%, #e0e0e0 26%, #efefef 48%, #d9d9d9 75%, #bcbcbc 100%);
+  box-shadow: 1px 1px 10px rgb(255, 215, 0);
+}
+.timerBox {
+  display: flex;
+  box-sizing: border-box;
+  padding: 30px 20px 0;
+  justify-content: center;
+  flex-direction: column;
+  gap: 15px;
+}
+.timer {
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  gap: 25px;
+  height: 60px;
+  width: 220px;
+  border: 2px solid rgb(173, 255, 47);
+  border-radius: 15px;
+  box-shadow: 3px 3px 15px rgba(0, 100, 0, .7);
+  background-color: rgba(173, 255, 47, .2);
+  text-align: center;
+  color : DarkGreen;
+  font-size: 45px;
+  font-family: 'Marck Script', cursive;
+}
+.timer > div {
+  width: 40px;
+}
+
+.timer > div+div:before {
+  content: '\1361';
+  position: absolute;
+  left: 47%;
+}
+.boxToPauseImg {
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  padding: 15px 0;
+  height: 400px;
+  width: 400px;
+}
+.boxToPauseImg > img {
+  align-self: center;
+}
+.tabBox {
+  display: flex;
+  padding: 15px 0;
+  width: 450px;
+	flex-wrap: wrap;
+	box-sizing: border-box;
+	justify-content: center;
+	gap: 7px;
+}
+.flexCell {
+  box-sizing: border-box;
+  height: 90px;
+  width: 90px;
+  border: 2px solid gold;
+  border-radius: 15px;
+  padding-top: 4px;
+  padding-left: 3px;
+  background-image: linear-gradient(to right, #f83600 0%, #f9d423 100%);
+  opacity: .9;
+  box-shadow: 3px 3px 10px rgba(0, 100, 0, 0.9);
+}
+.flexCell:hover {
+	transform: scale(1.03);
+	transition: 0.3s;
+  /*box-shadow: 0 0 5px rgba(255, 255, 0, .5);*/
+}
+.imgCover {
+  box-sizing: border-box;
+  height: 96%;
+  width: 96%;
+  background-image: linear-gradient(to right, #f83600 0%, #f9d423 100%);
+  border-radius: 15%;
+  border: 2px solid gold;
+}
+.imgCover:hover {
+  box-shadow: 0 0 5px rgb(255, 255, 0);
+  border: 2px solid rgb(255, 255, 0);
+}
+.flexCell img {
+  height: 70px;
+  width: 70px;
+}
+.elmHidden {
+  display: none;
+}
+/*footer*/
+footer {
+  flex: 0 0 auto;
+  width: 100%;
+  height: 90px;
+}
+.message {
+  position: absolute;
+  display: flex;
+  align-items:center;
+  justify-content: center;
+  align-self: center;
+  top: 20%;
+  height: 400px;
+  width: 400px;
+  box-sizing: border-box;
+  color: rgb(255, 0, 0);
+  font-family: 'Marck Script', cursive;
+  font-size: 60px;
+  background-image: linear-gradient(to top, lightgrey 0%, lightgrey 1%, #e0e0e0 26%, #efefef 48%, #d9d9d9 75%, #bcbcbc 100%);
+  opacity: .9;
+  border-radius: 15px;
+  border: 1px solid gold;
+  box-shadow: 5px 5px 15px rgb(255, 255, 0);
+  z-index: 3;
+}
