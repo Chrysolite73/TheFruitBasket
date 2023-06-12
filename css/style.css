@@ -1,10 +1,16 @@
+/*@font-face {
+  font-family: 'Marck Script';
+  src: url(../fonts/MarckScript-Regular.ttf) format('ttf');
+}
+@font-face {
+  font-family: 'Underdog cursive';
+  src: url(../fonts/Underdog-Regular.ttf) format('ttf');
+}*/
+@import url('https://fonts.googleapis.com/css2?family=Marck+Script&family=Underdog&display=swap');
 * {
   margin: 0;
   padding: 0;
 }
-/*font-family: 'Balsamiq Sans', cursive;
-font-family: 'Caveat', cursive;
-font-family: 'Pacifico', cursive;*/
 html,
 body {
   height: 100%;
@@ -14,7 +20,6 @@ body {
   flex-direction: column;
   min-height: 100vh;
   background-image: linear-gradient(140deg, #c0dd4a 0%, #006400 100%);
-  /* background-image: linear-gradient(140deg, rgb(192, 221, 94) 0%, rgb(0, 100, 0) 100%);*/
 }
 /*header*/
 header {
@@ -25,10 +30,6 @@ header {
   text-align: center;
   box-sizing: border-box;
   padding-top: 20px;
- /* display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content:flex-end;*/
 }
 .logo img {
   height: 110px;
@@ -36,7 +37,7 @@ header {
   padding-bottom: 20px;
 }
 h1 {
-  color: rgb(250, 250, 70)	;
+  color: rgb(250, 250, 70);
   letter-spacing: 3px;
   font-family: 'Underdog', cursive;
   font-size: 35px;
@@ -51,23 +52,22 @@ h1 {
 .mainBox, .rigthBox, .leftBox {
   display: flex;
   flex-direction: column;
-  gap: 10px;
 }
 .rigthBox, .leftBox {
-  width: 350px;
+  min-width: 220px;
+  position: relative;
 }
 .mainBox {
-  align-items: center;
+  width: 470px;
+  justify-content: space-evenly;
 }
 .buttonBox {
   box-sizing: border-box;
-  padding: 30px 10px 20px;
-  width: 470px;
   display: flex;
   align-items: center;
-  gap: 10px;
+  justify-content: space-evenly;
 }
-.button {
+.button, button {
   opacity: .9;
   box-sizing: border-box;
   height: 60px;
@@ -83,30 +83,14 @@ h1 {
   cursor: pointer;
   z-index: 1;
 }
-.button:hover {
+.button:hover, button:hover {
   box-shadow: 0 0 5px rgba(255, 255, 0, .7);
-  /*transform: scale(1.005);
-	transition: 0.3s;*/
-}
-button {
-  margin: 3px;
-  height: 50px;
-  width: 210px;
-  border-radius: 10px;
-  border: 1px solid rgba(255, 255, 0, .7);
-  background-color: rgba(255, 255, 0, .7);
-  color : DarkGreen;
-  font-size: 33px;
-  font-family: 'Marck Script', cursive;
-  cursor: pointer;
 }
 .dropdown-menu {
   display: none;
   box-sizing: border-box;
-  padding: 5px;
   margin-top: 7px;
-  gap: 5px;
-  justify-content: center;
+  gap: 7px;
   width: 217px;
   background-color: yellow;
   border-radius: 10px;
@@ -116,7 +100,7 @@ button {
 .button:hover > .dropdown-menu,
 .button > .dropdown-menu:hover {
 display: flex;
-flex-direction: row;
+flex-direction: column;
 align-items: start;
 }
 .menuButton {
@@ -127,16 +111,18 @@ align-items: start;
   height: 50px;
   width: 215px;
 }
-.menu-timer {
-  font-size: 27px;
-  align-self: center;
+.menu-item {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: space-evenly;
+  font-size: 29px;
 }
 .checkbox {
   box-sizing: border-box;
   display:flex;
   height: 31px;
   width: 31px;
-  align-self: center;
   justify-content: center;
   align-items: center;
   font-size: 28px;
@@ -148,10 +134,10 @@ align-items: start;
 .timerBox {
   display: flex;
   box-sizing: border-box;
-  padding: 30px 20px 0;
-  justify-content: center;
   flex-direction: column;
   gap: 15px;
+  position: absolute;
+  top: 5%;
 }
 .timer {
   box-sizing: border-box;
@@ -173,40 +159,32 @@ align-items: start;
 .timer > div {
   width: 40px;
 }
-
 .timer > div+div:before {
   content: '\1361';
   position: absolute;
   left: 47%;
 }
-.boxToPauseImg {
-  box-sizing: border-box;
-  display: flex;
-  justify-content: center;
-  padding: 15px 0;
-  height: 400px;
-  width: 400px;
-}
 .boxToPauseImg > img {
   align-self: center;
+  height: 90%;
 }
-.tabBox {
+.tabBox, .boxToPauseImg {
   display: flex;
-  padding: 15px 0;
-  width: 450px;
 	flex-wrap: wrap;
+  height: 381px;
 	box-sizing: border-box;
 	justify-content: center;
 	gap: 7px;
 }
 .flexCell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   box-sizing: border-box;
   height: 90px;
   width: 90px;
   border: 2px solid gold;
   border-radius: 15px;
-  padding-top: 4px;
-  padding-left: 3px;
   background-image: linear-gradient(to right, #f83600 0%, #f9d423 100%);
   opacity: .9;
   box-shadow: 3px 3px 10px rgba(0, 100, 0, 0.9);
@@ -214,12 +192,11 @@ align-items: start;
 .flexCell:hover {
 	transform: scale(1.03);
 	transition: 0.3s;
-  /*box-shadow: 0 0 5px rgba(255, 255, 0, .5);*/
 }
 .imgCover {
   box-sizing: border-box;
-  height: 96%;
-  width: 96%;
+  height: 90%;
+  width: 90%;
   background-image: linear-gradient(to right, #f83600 0%, #f9d423 100%);
   border-radius: 15%;
   border: 2px solid gold;
@@ -240,24 +217,36 @@ footer {
   flex: 0 0 auto;
   width: 100%;
   height: 90px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
+footer>span, span>a {
+  font-family: 'Marck Script', cursive;
+  color: rgb(250, 250, 70);
+  font-size: 21px;
+}
+
 .message {
   position: absolute;
   display: flex;
   align-items:center;
-  justify-content: center;
   align-self: center;
   top: 20%;
-  height: 400px;
-  width: 400px;
+  height: 500px;
+  width: 550px;
   box-sizing: border-box;
   color: rgb(255, 0, 0);
   font-family: 'Marck Script', cursive;
-  font-size: 60px;
   background-image: linear-gradient(to top, lightgrey 0%, lightgrey 1%, #e0e0e0 26%, #efefef 48%, #d9d9d9 75%, #bcbcbc 100%);
   opacity: .9;
   border-radius: 15px;
   border: 1px solid gold;
   box-shadow: 5px 5px 15px rgb(255, 255, 0);
   z-index: 3;
+}
+.message > span {
+  text-align: center;
+  width: 100%;
 }
