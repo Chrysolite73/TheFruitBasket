@@ -6,7 +6,24 @@
   font-family: 'Underdog cursive';
   src: url(../fonts/Underdog-Regular.ttf) format('ttf');
 }*/
-@import url('https://fonts.googleapis.com/css2?family=Marck+Script&family=Underdog&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Marck+Script&family=Underdog&display=swap'); */
+/* marck-script-regular - cyrillic_latin */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Marck Script';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../fonts/marck-script-v20-cyrillic_latin-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+/* underdog-regular - cyrillic_latin */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Underdog';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../fonts/underdog-v23-cyrillic_latin-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
 * {
   margin: 0;
   padding: 0;
