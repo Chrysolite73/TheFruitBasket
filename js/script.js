@@ -23,9 +23,9 @@ document.addEventListener( 'DOMContentLoaded', function () {
   let pauseButton = document.querySelector( '.pauseButton' );
   let popUp = document.querySelector('.pop-up');
   let time;
-  let sec;
-  let timeCount;
-  let min;
+  //let sec;
+  let timeCount = 0;
+  //let min;
   let boxToPauseImg;
   let imgToPause;
 
@@ -34,6 +34,7 @@ document.addEventListener( 'DOMContentLoaded', function () {
   nemuRules.addEventListener( 'click', showRules, false );
 
   function newGame ( e ) { 
+    time = Date.now(); 
     countImgs = 0;
     checkGameEnd = 0;
     sec = 0;
@@ -44,7 +45,8 @@ document.addEventListener( 'DOMContentLoaded', function () {
         imgBox[i].remove();
         imgCover[i].remove();
       }
-      timer.innerHTML = '<div>00</div><div>00</div>';
+     // displayTimerElement ( timer, '00', '00' );
+      //timer.innerHTML = '<div>00</div><div>00</div>';
       clearInterval( idTimer );
       pauseButton.removeEventListener('click', stopTimer, false );
       if ( checkbox.getAttribute( 'name' ) == 'timerOn' ) {
@@ -142,6 +144,9 @@ document.addEventListener( 'DOMContentLoaded', function () {
     return elemImg;
   }
   function appendTimer ( e ) {
+    console.log ("Старт таймер");
+    let minSecInText = getMinSec (timeCount);
+    displayTimerElement ( timer, minSecInText.min, minSecInText.sec );
     if ( checkbox.getAttribute( 'name' ) == 'timerOff' ) {
       checkbox.setAttribute( 'name', 'timerOn' );
       checkbox.textContent = '❃';
@@ -163,8 +168,9 @@ document.addEventListener( 'DOMContentLoaded', function () {
   }
   function runTimer() {
     pauseButton.addEventListener('click', stopTimer, false );
-    let newTime = Date.now();
+    /*let newTime = Date.now();
     timeCount = newTime - time;
+    console.log ( timeCount);
     sec = Math.floor(timeCount / 1000);
     if ( sec >= 60 ) {
       sec = Math.floor( (timeCount / 1000) % 60) ;
@@ -175,9 +181,33 @@ document.addEventListener( 'DOMContentLoaded', function () {
     };
     if ( String(min).length < 2 ) {
       min = '0' + min;
-    };
-    timer.innerHTML = '<div>'+ min +'</div><div>' + sec + '</div>';
+    };*/
+    let minSecInText = getMinSec (timeCount);
+    displayTimerElement ( timer, minSecInText.min, minSecInText.sec );
+    /*
+    timer.innerHTML = '<div>'+ min +'</div><div>' + sec + '</div>';*/
   }  
+
+  function getMinSec (count) {
+    /*let newTime = Date.now();
+    count = newTime - time;*/
+    
+    console.log ( count);
+    let sec = Math.floor(count / 1000);
+    let min = 0;
+    console.log ( sec);
+    if ( sec >= 60 ) {
+      sec = Math.floor( (count / 1000) % 60) ;
+      min = Math.floor( (count / 1000) / 60 );
+    }
+    if ( String(sec).length < 2 ) {
+      sec = '0' + sec;
+    };
+    if ( String(min).length < 2 ) {
+      min = '0' + min;
+    };
+    return { min: min, sec: sec };
+  }
   function stopTimer ( e ) {
     if ( idTimer !== null ) {
       pauseButton.textContent = "Продолжить";
@@ -214,4 +244,13 @@ document.addEventListener( 'DOMContentLoaded', function () {
     toggleMessage ();
     popUp.addEventListener( 'click', toggleMessage, false );
   }
+  
+  function displayTimerElement ( elem, min, sec ) {
+    elem.innerHTML = timerTemplate (min, sec);
+  }
+
+ function timerTemplate (min, sec) {
+  return `<div> ${min} </div><div>  ${sec}  </div>`;
+ }
+  
 }, false );
