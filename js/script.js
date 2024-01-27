@@ -7,10 +7,18 @@ document.addEventListener( 'DOMContentLoaded', function () {
   let gameStatus = GameStatuses.Default;
   let withTimer = false;
 
-  let startButton = document.querySelector( '.startButton' );
+  const startButton = document.querySelector( '.startButton' );
+  const timerCheckBox = document.querySelector( '.checkbox' );
+  const pauseButton = document.querySelector( '.pauseButton' );
+  const popUp = document.querySelector('.pop-up');
+  const flexCell = document.querySelectorAll( '.flexCell' );
+  const tabBox = document.querySelector( '.tabBox' )
+  const nemuRules = document.querySelector( '.menu-rules' );
+  const menuBox = document.querySelector( '.menuBox' ); 
+  const timerBox = document.querySelector( '.timerBox' );
+
+
   let mixFruit;
-  let flexCell = document.querySelectorAll( '.flexCell' );
-  let tabBox = document.querySelector( '.tabBox' )
   let imgCover = [];
   let imgBox = [];
   let img = [];
@@ -18,19 +26,11 @@ document.addEventListener( 'DOMContentLoaded', function () {
   let idToCheck = [];
   let idNum;
   let countImgs;
-  let nemuRules = document.querySelector( '.menu-rules' );
-  let menuBox = document.querySelector( '.menuBox' ); 
-  let timerBox = document.querySelector( '.timerBox' );
   let idTimer;
-  let timer = document.querySelector( '.timer' );
+  const timer = document.querySelector( '.timer' );
   let checkGameEnd;
-  let timerCheckBox = document.querySelector( '.checkbox' );
-  let pauseButton = document.querySelector( '.pauseButton' );
-  let popUp = document.querySelector('.pop-up');
   let time;
-  //let sec;
   let timeCount = 0;
-  //let min;
   let boxToPauseImg;
   let imgToPause;
 
@@ -51,15 +51,13 @@ document.addEventListener( 'DOMContentLoaded', function () {
         imgBox[i].remove();
         imgCover[i].remove();
       }
-     // displayTimerElement ( timer, '00', '00' );
-      //timer.innerHTML = '<div>00</div><div>00</div>';
       clearInterval( idTimer );
       pauseButton.removeEventListener('click', stopTimer, false );
       if ( withTimer ) {
-        //withTimer = false;
-        //timerCheckBox.setAttribute( 'name', 'timerOff' );
+        withTimer = false;
+        timerCheckBox.setAttribute( 'name', 'timerOff' );
         timerBox.classList.toggle( "elmHidden" );
-        //timerCheckBox.textContent = '';        
+        timerCheckBox.textContent = '';        
       }
 
       tabBox.removeEventListener( 'click', turnOffMenu, false );
