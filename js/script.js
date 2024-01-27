@@ -1,7 +1,12 @@
 let fruit = [ 'apple.png', 'bananas.png', 'grape.png', 'lemon.png', 'mandarin.png', 'pear.png', 'pineapple.png', 'watermelon.png', 'apple.png', 'bananas.png', 'grape.png', 'lemon.png', 'mandarin.png', 'pear.png', 'pineapple.png', 'watermelon.png' ];
 const PATH = 'images/';
+const GameStatuses = {Default: "Default", NewGame: "NewGame", InGame: "InGame", Pause: "Pause", GameOver: "GameOver"};
 
 document.addEventListener( 'DOMContentLoaded', function () { 
+
+  let gameStatus = GameStatuses.Default;
+  let withTimer = false;
+
   let startButton = document.querySelector( '.startButton' );
   let mixFruit;
   let flexCell = document.querySelectorAll( '.flexCell' );
@@ -19,7 +24,7 @@ document.addEventListener( 'DOMContentLoaded', function () {
   let idTimer;
   let timer = document.querySelector( '.timer' );
   let checkGameEnd;
-  let checkbox = document.querySelector( '.checkbox' );
+  let timerCheckBox = document.querySelector( '.checkbox' );
   let pauseButton = document.querySelector( '.pauseButton' );
   let popUp = document.querySelector('.pop-up');
   let time;
@@ -30,10 +35,11 @@ document.addEventListener( 'DOMContentLoaded', function () {
   let imgToPause;
 
   startButton.addEventListener( 'click', newGame, false );
-  checkbox.addEventListener( 'click', appendTimer, false );
+  timerCheckBox.addEventListener( 'click', appendTimer, false );
   nemuRules.addEventListener( 'click', showRules, false );
 
   function newGame ( e ) { 
+    gameStatus = GameStatuses.NewGame;
     time = Date.now(); 
     countImgs = 0;
     checkGameEnd = 0;
@@ -49,11 +55,13 @@ document.addEventListener( 'DOMContentLoaded', function () {
       //timer.innerHTML = '<div>00</div><div>00</div>';
       clearInterval( idTimer );
       pauseButton.removeEventListener('click', stopTimer, false );
-      if ( checkbox.getAttribute( 'name' ) == 'timerOn' ) {
-        checkbox.setAttribute( 'name', 'timerOff' );
+      if ( withTimer ) {
+        //withTimer = false;
+        //timerCheckBox.setAttribute( 'name', 'timerOff' );
         timerBox.classList.toggle( "elmHidden" );
-        checkbox.textContent = '';
+        //timerCheckBox.textContent = '';        
       }
+
       tabBox.removeEventListener( 'click', turnOffMenu, false );
       imgToCheck.splice( 0, imgToCheck.length); 
       idToCheck.splice( 0, idToCheck.length);
@@ -95,6 +103,7 @@ document.addEventListener( 'DOMContentLoaded', function () {
     tabBox.removeEventListener( 'click', turnOffMenu, false );
   }
   function сheckImg ( e ) {
+    console.log("withTimer: ", withTimer);
     idNum = +( this.getAttribute( "id" ) );
     if( countImgs == 0 ) { 
       toggleImg( idNum );
@@ -112,7 +121,7 @@ document.addEventListener( 'DOMContentLoaded', function () {
         imgCover[idToCheck[0]].removeEventListener( 'click', сheckImg, false );
         imgCover[idToCheck[1]].removeEventListener( 'click', сheckImg, false );
           if ( checkGameEnd == 8 ) {
-            if ( checkbox.getAttribute( 'name' ) == 'timerOn' ) {
+            if ( withTimer ) {
               clearInterval( idTimer );
             }
             createMessage ();
@@ -146,17 +155,19 @@ document.addEventListener( 'DOMContentLoaded', function () {
   function appendTimer ( e ) {
     console.log ("Старт таймер");
     let minSecInText = getMinSec (timeCount);
-    displayTimerElement ( timer, minSecInText.min, minSecInText.sec );
-    if ( checkbox.getAttribute( 'name' ) == 'timerOff' ) {
-      checkbox.setAttribute( 'name', 'timerOn' );
-      checkbox.textContent = '❃';
+    displayTimerElement ( timer, minSecInText.min, minSecInText.sec);
+    if ( withTimer ) {
+      timerCheckBox.setAttribute( 'name', 'timerOff' );
+      withTimer = false;
       timerBox.classList.toggle( "elmHidden" );
-      tabBox.addEventListener( 'click', initTimer, false );
-    } else {
-      checkbox.setAttribute( 'name', 'timerOff' );
-      timerBox.classList.toggle( "elmHidden" );
-      checkbox.textContent = '';
+      timerCheckBox.textContent = '';
       tabBox.removeEventListener( 'click', initTimer, false );
+    } else {
+      withTimer = true;
+      timerCheckBox.setAttribute( 'name', 'timerOn' );
+      timerCheckBox.textContent = '❃';
+      timerBox.classList.toggle( "elmHidden" );
+      tabBox.addEventListener( 'click', initTimer, false );      
     }
   }
   function initTimer() {
@@ -164,24 +175,16 @@ document.addEventListener( 'DOMContentLoaded', function () {
       time = Date.now(); 
       tabBox.removeEventListener( 'click', initTimer, false );
       idTimer = setInterval(runTimer, 1000 );
+      pauseButton.addEventListener('click', stopTimer, false );
     }
   }
   function runTimer() {
-    pauseButton.addEventListener('click', stopTimer, false );
-    /*let newTime = Date.now();
+    console.log("GameStatus:", gameStatus);
+
+
+    let newTime = Date.now();
     timeCount = newTime - time;
-    console.log ( timeCount);
-    sec = Math.floor(timeCount / 1000);
-    if ( sec >= 60 ) {
-      sec = Math.floor( (timeCount / 1000) % 60) ;
-      min = Math.floor( (timeCount / 1000) / 60 );
-    }
-    if ( String(sec).length < 2 ) {
-      sec = '0' + sec;
-    };
-    if ( String(min).length < 2 ) {
-      min = '0' + min;
-    };*/
+
     let minSecInText = getMinSec (timeCount);
     displayTimerElement ( timer, minSecInText.min, minSecInText.sec );
     /*
@@ -244,13 +247,25 @@ document.addEventListener( 'DOMContentLoaded', function () {
     toggleMessage ();
     popUp.addEventListener( 'click', toggleMessage, false );
   }
-  
-  function displayTimerElement ( elem, min, sec ) {
-    elem.innerHTML = timerTemplate (min, sec);
+  // function displayTimerElement(elem, min, sec) {
+  //   displayElement(elem, timerTemplate, {min: min, sec: sec});
+  // }
+
+  function displayTimerElement(elem, min, sec) {    
+    displayElement(elem, timerTemplate, {min: min, sec: sec});
   }
 
- function timerTemplate (min, sec) {
-  return `<div> ${min} </div><div>  ${sec}  </div>`;
+  function displayElement ( elem, templateProcessor, objParams) {
+    let htmlText = templateProcessor(objParams);
+    //debugger;
+    elem.innerHTML = htmlText;
+  }
+
+ function timerTemplate (objParams) {
+  //let htmlText = `<div> ${objParams.min} </div><div>  ${objParams.sec}  </div>`;
+  //let htmlText2 = "<div>" + min + "</div><div>" + sec + "</div>";
+  //debugger;
+  return `<div> ${objParams.min} </div><div>  ${objParams.sec}  </div>`;
  }
   
 }, false );
