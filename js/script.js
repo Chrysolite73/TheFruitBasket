@@ -35,8 +35,16 @@ document.addEventListener( 'DOMContentLoaded', function () {
   let imgToPause;
 
   startButton.addEventListener( 'click', newGame, false );
-  timerCheckBox.addEventListener( 'click', appendTimer, false );
+  //timerCheckBox.addEventListener( 'click', appendTimer, false );
+  timerCheckBox.addEventListener( 'click', inGameWithTimer, false );
   nemuRules.addEventListener( 'click', showRules, false );
+
+  function inGameWithTimer () {
+    appendTimer ();
+    if ( withTimer && gameStatus === GameStatuses.InGame ) {
+      initTimer();
+    }
+  }
 
   function newGame ( e ) { 
     gameStatus = GameStatuses.NewGame;
@@ -77,6 +85,7 @@ document.addEventListener( 'DOMContentLoaded', function () {
     startButton.textContent = "Начать заново";
     mixFruit = mixArr( fruit );
     tabBox.addEventListener( 'click', turnOffMenu, false );
+    gameStatus = GameStatuses.InGame
     pauseButton.textContent = "Пауза";
     for ( let i = 0; i < fruit.length; i++ ) { 
       flexCell[i].style.backgroundImage = "linear-gradient(to top, lightgrey 0%, lightgrey 1%, #e0e0e0 26%, #efefef 48%, #d9d9d9 75%, #bcbcbc 100%)";
@@ -168,14 +177,23 @@ document.addEventListener( 'DOMContentLoaded', function () {
       tabBox.addEventListener( 'click', initTimer, false );      
     }
   }
-  function initTimer() {
+  /*function initTimer() {
     if ( startButton.getAttribute( 'name' ) == 'restartGame' ) { 
       time = Date.now(); 
       tabBox.removeEventListener( 'click', initTimer, false );
       idTimer = setInterval(runTimer, 1000 );
       pauseButton.addEventListener('click', stopTimer, false );
     }
+  }*/
+  function initTimer() {
+      time = Date.now(); 
+      tabBox.removeEventListener( 'click', initTimer, false );
+      idTimer = setInterval(runTimer, 1000 );
+      pauseButton.addEventListener('click', stopTimer, false );
   }
+
+
+
   function runTimer() {
     console.log("GameStatus:", gameStatus);
 
