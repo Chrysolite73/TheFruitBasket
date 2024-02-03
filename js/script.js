@@ -10,7 +10,7 @@ document.addEventListener( 'DOMContentLoaded', function () {
   const startButton = document.querySelector( '.startButton' );
   const timerCheckBox = document.querySelector( '.checkbox' );
   const pauseButton = document.querySelector( '.pauseButton' );
-  const popUp = document.querySelector('.pop-up');
+  const popUp = document.getElementById('mainPopUp');
   const flexCell = document.querySelectorAll( '.flexCell' );
   const tabBox = document.querySelector( '.tabBox' )
   const nemuRules = document.querySelector( '.menu-rules' );
@@ -246,6 +246,10 @@ document.addEventListener( 'DOMContentLoaded', function () {
       idTimer = setInterval(runTimer, 1000, min, sec );
     }
   }
+  function createPopup(popUp){
+
+  }
+
   function createMessage () {
     pauseButton.removeEventListener('click', stopTimer, false );
     popUp.innerHTML = '<span>Вы победили!</span>';
@@ -268,20 +272,18 @@ document.addEventListener( 'DOMContentLoaded', function () {
   // }
 
   function displayTimerElement(elem, min, sec) {    
-    displayElement(elem, timerTemplate, {min: min, sec: sec});
+    displayElement(elem, timerTemplate, min,sec);
   }
 
-  function displayElement ( elem, templateProcessor, objParams) {
-    let htmlText = templateProcessor(objParams);
-    //debugger;
-    elem.innerHTML = htmlText;
+  function displayElement ( elem, templateProcessor, ...objParams) {
+    elem.innerHTML = templateProcessor(...objParams);;
   }
 
- function timerTemplate (objParams) {
+ function timerTemplate (...objParams) {
   //let htmlText = `<div> ${objParams.min} </div><div>  ${objParams.sec}  </div>`;
   //let htmlText2 = "<div>" + min + "</div><div>" + sec + "</div>";
   //debugger;
-  return `<div> ${objParams.min} </div><div>  ${objParams.sec}  </div>`;
+  return `<span>${objParams[0]}</span><span>${objParams[1]}</span>`;
  }
   
 }, false );

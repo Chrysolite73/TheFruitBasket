@@ -159,7 +159,7 @@ align-items: start;
 .timer > div {
   width: 40px;
 }
-.timer > div+div:before {
+.timer > span+span:before {
   content: '\1361';
   position: absolute;
   left: 47%;
