@@ -246,7 +246,26 @@ footer>span, span>a {
   box-shadow: 5px 5px 15px rgb(255, 255, 0);
   z-index: 3;
 }
-.message > span {
+.message > span, #mainPopUp > span {
   text-align: center;
   width: 100%;
+}
+#mainPopUp {
+  position: absolute;
+  display: none;
+  align-items:center;
+  align-self: center;
+  top: 20%;
+  height: 500px;
+  width: 550px;
+  box-sizing: border-box;
+  color: rgb(255, 0, 0);
+  font-family: 'Marck Script', cursive;
+  font-size: 40px;
+  background-image: linear-gradient(to top, lightgrey 0%, lightgrey 1%, #e0e0e0 26%, #efefef 48%, #d9d9d9 75%, #bcbcbc 100%);
+  opacity: .9;
+  border-radius: 15px;
+  border: 1px solid gold;
+  box-shadow: 5px 5px 15px rgb(255, 255, 0);
+  z-index: 3;
 }

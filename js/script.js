@@ -10,7 +10,8 @@ document.addEventListener( 'DOMContentLoaded', function () {
   const startButton = document.querySelector( '.startButton' );
   const timerCheckBox = document.querySelector( '.checkbox' );
   const pauseButton = document.querySelector( '.pauseButton' );
-  const popUp = document.getElementById('mainPopUp');
+  const popUp = document.querySelector('.pop-up');
+  const popUp2 = document.getElementById('mainPopUp');
   const flexCell = document.querySelectorAll( '.flexCell' );
   const tabBox = document.querySelector( '.tabBox' )
   const nemuRules = document.querySelector( '.menu-rules' );
@@ -246,8 +247,11 @@ document.addEventListener( 'DOMContentLoaded', function () {
       idTimer = setInterval(runTimer, 1000, min, sec );
     }
   }
-  function createPopup(popUp){
-
+  function createPopup(popUp, htmlText, alertType){
+    popUp.classList.add(alertType);
+    popUp.innerHTML = htmlText;
+    popUp.style.display = 'flex';
+    popUp.addEventListener( 'click', () => popUp.style.display = 'none', false );
   }
 
   function createMessage () {
@@ -257,16 +261,21 @@ document.addEventListener( 'DOMContentLoaded', function () {
     toggleMessage ();
     popUp.addEventListener( 'click', toggleMessage, false );
   }
-  function toggleMessage ( e ) {
+
+  function showRules ( e ) {
+    let msg = '<span>На поле скрыты 8 пар картинок. Необходимо найти пару. Играть можно с таймером или без него.</span>';
+    createPopup (popUp2, msg, 'alert-rules');
+  }
+  /*function toggleMessage ( e ) {
     popUp.classList.toggle( "elmHidden" );
     popUp.classList.toggle( "message" );
-  }
-  function showRules ( e ) {
+  }*/
+  /*function showRules ( e ) {
     popUp.style.fontSize = '40px';
     popUp.innerHTML = '<span>На поле скрыты 8 пар картинок. Необходимо найти пару. Играть можно с таймером или без него.</span>';
     toggleMessage ();
     popUp.addEventListener( 'click', toggleMessage, false );
-  }
+  }*/
   // function displayTimerElement(elem, min, sec) {
   //   displayElement(elem, timerTemplate, {min: min, sec: sec});
   // }
